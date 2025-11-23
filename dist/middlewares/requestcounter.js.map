@@ -1,0 +1,1 @@
+{"version":3,"file":"requestcounter.js","sourceRoot":"","sources":["../../src/middlewares/requestcounter.ts"],"names":[],"mappings":";;AAGA,wCAIC;AAND,iBAAiB;AACjB,IAAI,YAAY,GAAG,CAAC,CAAA;AACpB,SAAgB,cAAc,CAAC,GAAW,EAAE,GAAY,EAAE,IAAiB;IACvE,YAAY,EAAE,CAAA;IACd,OAAO,CAAC,GAAG,CAAC,sBAAsB,YAAY,EAAE,CAAC,CAAA;IACjD,IAAI,EAAE,CAAA;AACV,CAAC"}
