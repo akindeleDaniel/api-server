@@ -1,20 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.validateUsers = validateUsers;
 exports.validateEmail = validateEmail;
 exports.validationDOB = validationDOB;
 exports.validatePassword = validatePassword;
 exports.genderCheck = genderCheck;
 exports.Parameters = Parameters;
-// validation user
-function validateUsers(req, res, next) {
-    const { name, email } = req.body;
-    if (!name || !email) {
-        return res.status(400).json({ error: 'Name and email reqiured' });
-    }
-    return next();
-}
-// email validation
+// Email format
 function validateEmail(req, res, next) {
     const { email } = req.body;
     if (!email)
@@ -26,7 +17,7 @@ function validateEmail(req, res, next) {
     }
     next();
 }
-// date of birth validation
+// Date of birth format
 function validationDOB(req, res, next) {
     const { dateOfBirth } = req.body;
     const dobFormat = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
@@ -58,7 +49,7 @@ function validationDOB(req, res, next) {
     }
     next();
 }
-// password validation
+// Password validation
 function validatePassword(req, res, next) {
     const { password } = req.body;
     const passwordStrength = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{10,}$/;
@@ -68,7 +59,7 @@ function validatePassword(req, res, next) {
     }
     next();
 }
-// gender check
+// Gender check
 function genderCheck(req, res, next) {
     const { gender } = req.body;
     const genders = ["male", "female", "others"];

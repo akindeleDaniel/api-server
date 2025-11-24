@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUsers = void 0;
 const express_1 = require("express");
-const interfaces_1 = require("../interfaces");
-exports.getUsers = (0, express_1.Router)();
-exports.getUsers.get('/users', (req, res) => {
-    res.json({ count: interfaces_1.users.length, users: interfaces_1.users });
+const fileManager_1 = require("../fileManager");
+const router = (0, express_1.Router)();
+router.get('/users', async (req, res) => {
+    const users = await (0, fileManager_1.readUsers)();
+    res.json({ users });
 });
-exports.default = exports.getUsers;
+exports.default = router;
 //# sourceMappingURL=get-users.js.map

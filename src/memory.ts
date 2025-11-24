@@ -1,6 +1,6 @@
 import express, {Response, Request, NextFunction} from 'express'
 import { logger,requestCounter } from './middlewares'
-import {getUsers,registration,login} from './routes'
+import {getUsers,registration,login,update,delete as delete_} from './routes'
 
 
 const app = express()
@@ -9,12 +9,11 @@ app.use(express.json())
 
 app.use(logger)     
 app.use(requestCounter)
-app.use('./register', registration)
-app.use('./get-users',getUsers)
-app.use('./login', login)
-
-
-
+app.use(registration)
+app.use(getUsers)
+app.use(login)
+app.use(update)
+app.use(delete_)
 
 app.use((err:Error,req:Request,res:Response, next:NextFunction)=>{
     console.log(err.message)
@@ -22,27 +21,9 @@ app.use((err:Error,req:Request,res:Response, next:NextFunction)=>{
     next()
 }) 
 
-// authorization
-export function authorization(req:Request,res:Response,next:NextFunction){
-    const apiKey = req.headers["x-api-key"]
-    if (apiKey !== "12345"){
-        return res.status(401).json({error:"Unauthorized"})
-    }
-    return next()
-}
-
 app.get("/", (req:Request, res:Response)=>{
     res.json({ message:"Hello!" })
 }) 
-
-app.get('/secret', authorization, (req:Request, res:Response) =>{
-    res.json({ message:'Secret unlocked'})
-})
-
-app.get('/profile',logger,authorization,(req:Request,res:Response)=>{
-    res.json({Name: 'Danny',Role: 'Admin'})
-})
-
 
 app.listen(PORT, () =>{
     console.log(`server running at http://localhost:${PORT}`)

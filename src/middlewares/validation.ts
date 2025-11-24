@@ -1,16 +1,4 @@
 import { Request,Response,NextFunction } from "express"
-import { users } from "../interfaces"
-
-// Email check
-export function emailExists(req: Request, res:Response,next:NextFunction){
-    const {email} = req.body
-    const found = users.find(user => user.email === email)
-
-    if (found){
-        return res.status(400).json({error:'Email already registered'})
-    }
-    return next()
-}
 
 // Email format
 export function validateEmail (req:Request,res:Response,next:NextFunction){

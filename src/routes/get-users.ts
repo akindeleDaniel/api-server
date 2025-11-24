@@ -1,8 +1,9 @@
 import { Router,Request,Response } from "express"
-import {users} from "../interfaces"
+import { readUsers } from "../fileManager"
 const router = Router()
-router.get('/users',(req:Request,res:Response)=>{
-    res.json({count:users.length,users: users})
+router.get('/users',async(req:Request,res:Response)=>{
+    const users = await readUsers()
+    res.json({users})
 })
 
 export default router

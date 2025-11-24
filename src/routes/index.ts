@@ -1,3 +1,5 @@
 export {default as registration} from './register'
 export {default as getUsers} from './get-users'
 export {default as login} from './login'
+export {default as update} from './update'
+export {default as delete} from './delete'
