@@ -67,6 +67,7 @@ function genderCheck(req, res, next) {
         res.status(400).json({ message: "Gender must be male,female or others" });
         return;
     }
+    next();
 }
 // Parameters
 function Parameters(req, res, next) {

@@ -1,11 +1,10 @@
 import { Router,Request,Response } from "express"
-import {hidePassword} from '../middlewares'
 import { readUsers, saveUsers } from "../fileManager"
 import { User } from "../interfaces"
 
 const router = Router()
 
-router.put('/update/:email',hidePassword, async(req:Request,res:Response)=>{
+router.put('/update/:email',async(req:Request,res:Response)=>{
     const {email} = req.params
     const {firstName,lastName,password,gender,dateOfBirth} = req.body
 const users = await readUsers()

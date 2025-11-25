@@ -67,6 +67,7 @@ export function genderCheck (req:Request,res:Response,next:NextFunction){
         if (!genders.includes(String(gender).toLowerCase())){
             res.status(400).json({message:"Gender must be male,female or others"})
         return}
+        next()
 }
 
 // Parameters

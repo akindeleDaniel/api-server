@@ -1,10 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
-const middlewares_1 = require("../middlewares");
 const fileManager_1 = require("../fileManager");
 const router = (0, express_1.Router)();
-router.put('/update/:email', middlewares_1.hidePassword, async (req, res) => {
+router.put('/update/:email', async (req, res) => {
     const { email } = req.params;
     const { firstName, lastName, password, gender, dateOfBirth } = req.body;
     const users = await (0, fileManager_1.readUsers)();

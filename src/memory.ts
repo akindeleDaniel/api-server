@@ -10,10 +10,10 @@ app.use(express.json())
 app.use(logger)     
 app.use(requestCounter)
 app.use(registration)
-app.use(getUsers)
 app.use(login)
 app.use(update)
 app.use(delete_)
+app.use(getUsers)
 
 app.use((err:Error,req:Request,res:Response, next:NextFunction)=>{
     console.log(err.message)

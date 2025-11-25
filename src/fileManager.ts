@@ -1,6 +1,8 @@
 import fs from "fs/promises"
+import path from "path"
 
-const filePath = "../data/users.json"
+const filePath = path.join(__dirname, "../src/data/users.json")
+
 
 export async function readUsers(){
     const data = await fs.readFile(filePath, "utf-8");

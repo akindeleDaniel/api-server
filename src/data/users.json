@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "firstName": "Ojo",
+    "lastName": "Daniel",
+    "email": "ojodanielakindele@gmail.com",
+    "dateOfBirth": "20/05/2000",
+    "password": "Ojodaniel@2008",
+    "gender": "male"
+  },
+  {
+    "firstName": "Danny",
+    "lastName": "Phantom",
+    "email": "dannyphantom7654321@gmail.com",
+    "dateOfBirth": "08/08/2000",
+    "password": "Killmon^1001",
+    "gender": "female"
+  }
+]

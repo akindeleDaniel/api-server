@@ -1,16 +1,9 @@
 import { Router,Request,Response } from "express"
+import bcrypt from "bcrypt"
 import { Parameters,validateEmail,validatePassword,validationDOB,genderCheck} from "../middlewares"
 import {User} from "../interfaces/user"
 import { readUsers,saveUsers } from "../fileManager"
 const router = Router()
-
-
-router.use(Parameters)
-router.use(validateEmail)
-router.use(validatePassword)
-router.use(validationDOB)
-router.use(genderCheck)
-
 
 router.post('/register',Parameters,validateEmail,validatePassword,validationDOB,genderCheck,async(req:Request,res:Response)=>{
     const {firstName,lastName,email,dateOfBirth,password,gender} = req.body
@@ -20,7 +13,6 @@ router.post('/register',Parameters,validateEmail,validatePassword,validationDOB,
     if(exists){
     res.status(400).json({message: 'Email already registered'})
     return}
-
 
         const newUser: User= {
             firstName,

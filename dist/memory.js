@@ -12,10 +12,10 @@ app.use(express_1.default.json());
 app.use(middlewares_1.logger);
 app.use(middlewares_1.requestCounter);
 app.use(routes_1.registration);
-app.use(routes_1.getUsers);
 app.use(routes_1.login);
 app.use(routes_1.update);
 app.use(routes_1.delete);
+app.use(routes_1.getUsers);
 app.use((err, req, res, next) => {
     console.log(err.message);
     res.status(500).json({ error: err.message });
