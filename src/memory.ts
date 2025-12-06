@@ -2,11 +2,14 @@ import express, {Response, Request, NextFunction} from 'express'
 import mongoose  from 'mongoose'
 import { logger,requestCounter } from './middlewares'
 import {getUsers,registration,login,update,delete as delete_} from './routes'
+import dotenv from 'dotenv'
+dotenv.config()
 
 const app = express()
 const PORT = 3000
 app.use(express.json())
-const MONGO_URL='mongodb+srv://ojodanielakindele_db_user:Ojodaniel2008@cluster0.uxuzgji.mongodb.net/?appName=Cluster0'
+const MONGO_URL = process.env.MONGO_URL
+const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY
 mongoose
 .connect(MONGO_URL!)
 .then(() => console.log('MongoDB connected'))
