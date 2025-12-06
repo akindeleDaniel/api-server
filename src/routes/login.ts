@@ -1,13 +1,12 @@
 import { Router, Request, Response } from "express"
-import { readUsers } from "../fileManager"
 import { User } from "../interfaces"
+import { userModel } from "../db/users"
 
 const router = Router()
 
 router.post("/login", async (req: Request, res: Response) => {
   const { email, password } = req.body
-  const users = await readUsers()
-  const user = users.find((u: User) => u.email === email)
+ const user = await userModel.findOne({email})
 
   if (!user) {
     res.status(400).json({ message: "User not found" })

@@ -1,8 +1,8 @@
 import { Router,Request,Response } from "express"
-import { readUsers } from "../fileManager"
+import { userModel } from "../db/users"
 const router = Router()
 router.get('/users',async(req:Request,res:Response)=>{
-    const users = await readUsers()
+    const users = await userModel.find()
     res.json({users})
 })
 

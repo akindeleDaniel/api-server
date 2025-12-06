@@ -1,11 +1,16 @@
 import express, {Response, Request, NextFunction} from 'express'
+import mongoose  from 'mongoose'
 import { logger,requestCounter } from './middlewares'
 import {getUsers,registration,login,update,delete as delete_} from './routes'
-
 
 const app = express()
 const PORT = 3000
 app.use(express.json())
+const MONGO_URL='mongodb+srv://ojodanielakindele_db_user:Ojodaniel2008@cluster0.uxuzgji.mongodb.net/?appName=Cluster0'
+mongoose
+.connect(MONGO_URL!)
+.then(() => console.log('MongoDB connected'))
+.catch((err:any)=> console.log("MongoDB Error:",err))
 
 app.use(logger)     
 app.use(requestCounter)

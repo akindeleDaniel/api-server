@@ -1,5 +1,5 @@
 import { Router,Request,Response } from "express"
-import { readUsers, saveUsers } from "../fileManager"
+import { userModel } from "../db/users"
 import { User } from "../interfaces"
 
 const router = Router()
@@ -7,14 +7,11 @@ const router = Router()
 router.put('/update/:email',async(req:Request,res:Response)=>{
     const {email} = req.params
     const {firstName,lastName,password,gender,dateOfBirth} = req.body
-const users = await readUsers()
-const userIndex = users.findIndex((u:User)=>u.email === email)
+const user = await userModel.findOne({email})
 
-    if (userIndex === -1){
+    if (!user){
         res.status(404).json({message:'User not found'})
     return }
-
-    const user = users[userIndex]
 
     if(firstName) user.firstName=firstName
     if(lastName) user.lastName=lastName
@@ -22,8 +19,7 @@ const userIndex = users.findIndex((u:User)=>u.email === email)
     if(dateOfBirth) user.dateOfBirth=dateOfBirth
     if(gender)user.gender=gender
 
-    users[userIndex] = user
-    await saveUsers(users)
+        await user.save()
     
     res.status(200).json({message:'User updated successfully', user})
 })
