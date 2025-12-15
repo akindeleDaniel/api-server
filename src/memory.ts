@@ -1,9 +1,10 @@
 import express, {Response, Request, NextFunction} from 'express'
+import dotenv from 'dotenv'
 import mongoose  from 'mongoose'
 import { logger,requestCounter } from './middlewares'
 import {getUsers,registration,login,update,delete as delete_} from './routes'
-import dotenv from 'dotenv'
 dotenv.config()
+
 
 const app = express()
 const PORT = 3000
@@ -19,7 +20,7 @@ app.use(logger)
 app.use(requestCounter)
 app.use(registration)
 app.use(login)
-app.use(update)
+app.use(update)              
 app.use(delete_)
 app.use(getUsers)
 
