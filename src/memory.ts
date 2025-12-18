@@ -1,28 +1,21 @@
 import express, {Response, Request, NextFunction} from 'express'
-import dotenv from 'dotenv'
-import mongoose  from 'mongoose'
 import { logger,requestCounter } from './middlewares'
-import {getUsers,registration,login,update,delete as delete_} from './routes'
-dotenv.config()
+import userRouter from "./routes/user"
+import dotenv from 'dotenv'
+import connect from './model/config'
 
+dotenv.config()
+connect()
+
+const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY
 
 const app = express()
 const PORT = 3000
 app.use(express.json())
-const MONGO_URL = process.env.MONGO_URL
-const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY
-mongoose
-.connect(MONGO_URL!)
-.then(() => console.log('MongoDB connected'))
-.catch((err:any)=> console.log("MongoDB Error:",err))
 
 app.use(logger)     
 app.use(requestCounter)
-app.use(registration)
-app.use(login)
-app.use(update)              
-app.use(delete_)
-app.use(getUsers)
+app.use("/user", userRouter)
 
 app.use((err:Error,req:Request,res:Response, next:NextFunction)=>{
     console.log(err.message)

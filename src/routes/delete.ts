@@ -1,10 +1,13 @@
 import { Router,Response,Request } from "express"
-import { userModel } from "../db/users"
+import { userModel } from "../model/users"
 
 const router = Router()
 
 router.delete("/delete/:email", async(req:Request,res:Response) => {
     const {email} = req.params
+        if (!email){
+        res.status(400).json({error:"Email is required"})
+    return}
     
     const user = await userModel.findOneAndDelete({email})
     if (!user){

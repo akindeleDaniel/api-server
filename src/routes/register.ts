@@ -1,7 +1,7 @@
 import { Router,Request,Response } from "express"
 import { Parameters,validateEmail,validatePassword,validationDOB,genderCheck} from "../middlewares"
 import {User} from "../interfaces/user"
-import { userModel } from "../db/users"
+import { userModel } from "../model/users"
 import bcrypt from "bcrypt"
 const router = Router()
 
@@ -30,7 +30,16 @@ router.post('/register',
             gender
         })
 
-        res.status(200).json({message:'Registration sucessful', data:newUser})
+        res.status(200).json({
+          message:'Registration sucessful', 
+            data:{
+              firstName:newUser.firstName,
+              lastName:newUser.lastName,
+              email:newUser.email,
+              dateOfBirth:newUser.dateOfBirth,
+              gender:newUser.gender
+        }
+      })
 })
 
 export default router

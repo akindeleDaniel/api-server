@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express"
-import { userModel } from "../db/users"
+import { userModel } from "../model/users"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 
@@ -20,13 +20,16 @@ router.post("/login", async (req: Request, res: Response) => {
      res.status(400).json({ message: "Invalid email or password" })
  return}
 
+  const userData= user.toObject()
+ const {password:_, ...safeUser} =userData
+
  const token = jwt.sign(
   {id:user._id, email:user.email},
   process.env.JWT_SECRET!,
   {expiresIn:"1h"}
  )
 
-  res.status(200).json({ message: "Login successful", user, token })
+  res.status(200).json({ message: "Login successful", user:safeUser, token })
 })
 
 export default router
